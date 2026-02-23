@@ -66,14 +66,14 @@ const Contact = () => {
     {
       icon: <Mail className="w-5 h-5" />,
       label: "Email",
-      value: "Itsmezoubaa@gmail.com",
-      link: "mailto:Itsmezoubaa@gmail.com"
+      value: "radouane.elasri@usmba.ac.ma",
+      link: "mailto:radouane.elasri@usmba.ac.ma"
     },
     {
       icon: <Phone className="w-5 h-5" />,
       label: "Phone",
-      value: "+212 701-230904",
-      link: "tel:+15551234567"
+      value: "+212 609365349",
+      link: "tel:+212609365349"
     },
     {
       icon: <MapPin className="w-5 h-5" />,
@@ -87,13 +87,13 @@ const Contact = () => {
     {
       icon: <Github className="w-5 h-5" />,
       name: "GitHub",
-      url: "https://github.com/zoubaax",
+      url: "https://github.com/radouane99",
       color: "hover:text-gray-400"
     },
     {
       icon: <Linkedin className="w-5 h-5" />,
       name: "LinkedIn",
-      url: "https://www.linkedin.com/in/zoubaa-mohammed-398266350",
+      url: "https://linkedin.com/in/radouane-elasri",
       color: "hover:text-blue-400"
     },
     // {
@@ -358,7 +358,7 @@ const Contact = () => {
 
                 <img
                   src={drakeMode ? logoDark : logoLight}
-                  alt="ZOUBAA Logo"
+                  alt="El-ASRI Logo"
                   className="h-12 object-contain"
                 />
               </div>
@@ -414,12 +414,12 @@ const Contact = () => {
               </h3>
               <div className="space-y-3">
                 <a
-                  href="mailto:Itsmezoubaa@gmail.com"
+                  href="mailto:radouane.elasri@usmba.ac.ma"
                   className={`cursor-target flex items-center gap-3 transition-all duration-300 hover:translate-x-2 ${drakeMode ? 'text-gray-300 hover:text-cyan-400' : 'text-gray-700 hover:text-blue-600'
                     }`}
                 >
                   <Mail className="w-4 h-4" />
-                  Itsmezoubaa@gmail.com
+                  radouane.elasri@usmba.ac.ma
                 </a>
                 <a
                   href="tel:+212701230904"
@@ -427,7 +427,7 @@ const Contact = () => {
                     }`}
                 >
                   <Phone className="w-4 h-4" />
-                  +212 701-230904
+                  +212 609365349
                 </a>
                 <div className={`flex items-center gap-3 ${drakeMode ? 'text-gray-300' : 'text-gray-700'
                   }`}>
