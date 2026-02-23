@@ -16,7 +16,7 @@ const techLogos = [
   { node: <SiGithub />, title: "GitHub", href: "https://github.com" },
 ];
 
-// Import your language icons
+// Import icons (khlihom bhal li kano)
 import reactIcon from '../assets/img/physics.png';
 import javascriptIcon from '../assets/img/js.png';
 import typescriptIcon from '../assets/img/typescript.png';
@@ -35,10 +35,13 @@ import Python from '../assets/img/Python.png';
 import PostgresSQL from '../assets/img/PostgresSQL.png';
 import supabase_img from '../assets/img/supabase.png';
 
-// Import company logos - you'll need to add these images to your assets
-import LOGOFMPDF from '../assets/img/LOGO-FMPDF.png';
-import NewDev from '../assets/img/NewDev.jpeg';
-import fiverr from '../assets/img/fiverr.webp';
+// Hna khassk dzid tswrat dyal les entreprises li khdemti fihom w l'mdariss dyalek f dossier img
+// w t-importihom hna. Ldb ghadi nkhli dyal Zoubaa bch maytla3ch lik erreur, mais khassk tbedlhom.
+import LOGOENS from '../assets/img/LOGO-FMPDF.png'; // Bdlou b logo dyal ENS Fès
+import EMarketLogo from '../assets/img/emarket.jpg'; // Bdlou b logo dyal E-Market Solutions
+import NewDev from '../assets/img/NewDev.jpeg'; // Bdlou b logo dyal InnovaPlus
+import ISTQBLogo from '../assets/img/ISTQB.png'; // Bdlou b logo dyal ISTQB (zidou f dossier img)
+
 const WorkHistory = () => {
   const { isDarkMode: drakeMode } = useTheme();
   const { t } = useTranslation();
@@ -69,91 +72,113 @@ const WorkHistory = () => {
       'Python': Python,
       'PostgreSQL': PostgresSQL,
       'Supabase': supabase_img,
+      'PHP': nodejsIcon, // N9drou nzidou icon dyal PHP
+      'C#': dotNet, 
+      'SQL Server': PostgresSQL,
     };
     return techIcons[tech];
   };
 
   const getCompanyLogo = (company) => {
     const companyLogos = {
-      'The Center for E-Learning, Simulation and Telemedicine': LOGOFMPDF,
-      'NewDev Maroc': NewDev,
-      'Fiverr - Freelance': fiverr,
-
+      'École Normale Supérieure, Fès': LOGOENS,
+      'E-Market Solutions': EMarketLogo,
+      'NewDEV': NewDev,
+      'GASQ': ISTQBLogo
     };
     return companyLogos[company] || null;
   };
 
   const experiences = [
     {
-      role: "Full-Stack Developer",
-      company: "Fiverr - Freelance",
-      duration: "Jan 2024 — Present",
-      location: "Remote",
-      description: "Providing full-stack development services to international clients through Fiverr platform. Specializing in building e-learning platforms, web applications, and custom software solutions using modern technologies.",
-      technologies: ["React", "Node.js", "Supabase", "JavaScript", "Python", "PostgreSQL", "Tailwind CSS", "Figma", "GitHub"],
-      type: "Freelance",
-      achievements: [
-        "Delivered  successful projects",
-        "Built custom e-learning platforms with interactive features",
-        "Developed medical management systems for healthcare clients",
-      ]
-    },
-
-    {
-      role: "Full-Stack Developer",
-      company: "NewDev Maroc",
-      duration: "Feb 2025 – April 2025",
-      location: "Remote",
-      description: "Creation of a medical management system with React.js, Tailwind CSS, Express.js and PostgreSQL; integration of features (online appointment scheduling, office administration, patient tracking) and DevOps practices for deployment.",
-      technologies: ["React", "JavaScript", "Node.js", "PostgreSQL", "Tailwind CSS", "GitHub", "Figma"],
+      role: t('about.exp1_title', { defaultValue: "Technicien Spécialisé en Développement" }),
+      company: t('about.exp1_company', { defaultValue: "École Normale Supérieure, Fès" }),
+      duration: t('about.exp1_date', { defaultValue: "Sept 2024 - Présent" }),
+      location: "Fès, Maroc",
+      description: t('about.exp1_desc', { defaultValue: "Développement d'une plateforme web pour la digitalisation des tâches académiques et maintenance du parc informatique." }),
+      technologies: ["JavaScript", "PostgreSQL", "React"], 
       type: "Full-time",
       achievements: [
-        "Enabled online appointments",
-        "Streamlined clinic administration",
-        "Automated DevOps deployment"
+        "Participation au développement d'une plateforme web académique",
+        "Maintenance et gestion du parc informatique",
+        "Amélioration des outils numériques internes"
       ]
     },
     {
-      role: "Full-Stack Developer",
-      company: "The Center for E-Learning, Simulation and Telemedicine",
-      duration: "Jan 2023 — Present",
-      location: "Remote",
-      description: "Development of a Python e-learning platform with React.js, Tailwind CSS, Express.js and PostgreSQL; integration of interactive features (quiz, exercises, animations) and collaborative management via GitHub.",
-      technologies: ["PostgreSQL", "JavaScript", "Tailwind CSS", "Figma", "React", "Node.js"],
-      type: "Freelance",
+      role: t('about.exp2_title', { defaultValue: "Agent Mailer & Développeur" }),
+      company: t('about.exp2_company', { defaultValue: "E-Market Solutions, Fès" }),
+      duration: t('about.exp2_date', { defaultValue: "Oct 2019 - Juin 2024" }),
+      location: "Fès, Maroc",
+      description: t('about.exp2_desc', { defaultValue: "Réalisation de campagnes d'emailing et développement de scripts d'automatisation avec Python (Selenium), JS, HTML et CSS." }),
+      technologies: ["Python", "Selenium", "JavaScript"],
+      type: "Full-time",
       achievements: [
-        "Built Python e-learning platform",
-        "Added interactive quizzes & exercises",
-        "Managed collaboration via GitHub"
+        "Réalisation de campagnes d'emailings promotionnels en masse",
+        "Développement de scripts d'automatisation",
+        "Réduction des erreurs humaines via l'automatisation"
+      ]
+    },
+    {
+      role: t('about.exp3_title', { defaultValue: "Développeur WinDev (Stage)" }),
+      company: t('about.exp3_company', { defaultValue: "InnovaPlus, Fès" }),
+      duration: t('about.exp3_date', { defaultValue: "Avril 2019 - Juin 2019" }),
+      location: "Fès, Maroc",
+      description: t('about.exp3_desc', { defaultValue: "Développement d'une application de gestion des congés avec WinDev et SQL Server." }),
+      technologies: ["SQL Server", "C#"], 
+      type: "Internship",
+      achievements: [
+        "Développement d'une application de gestion des congés",
+        "Génération de rapports et statistiques",
+        "Synchronisation avec le logiciel de paie"
       ]
     },
   ];
 
   const education = [
     {
-      degree: "Software Engineering",
-      institution: "The Private University of Fez (UPF)",
-      duration: "2025 — Present",
-      location: "Morocco",
-      description: "Advanced studies in software engineering with focus on modern web technologies, system architecture, and software development methodologies.",
+      degree: t('about.edu1_title', { defaultValue: "Ingénieur d'État en Génie Informatique" }),
+      institution: t('about.edu1_school', { defaultValue: "Université Privée de Fès" }),
+      duration: t('about.edu1_date', { defaultValue: "2025 - 2028" }),
+      location: "Fès, Maroc",
+      description: "Formation d'Ingénieur d'État axée sur les technologies de pointe et l'ingénierie logicielle.",
       status: "In Progress",
-      technologies: ["angularjs", "Spring Boot", "Selenium", "Machine Learning", ".NET"],
-      courses: ["Full Stack", "Cloud Computing", "Database Design", " DevOps", "Testing & QA", "Machine Learning", "Deep Learning"]
+      technologies: ["Java", "Python", "Machine Learning"],
+      courses: ["Génie Logiciel", "Systèmes d'Information", "Bases de Données"]
     },
     {
-      degree: "Specialized Technician in Digital Development",
-      institution: "OFPPT",
-      duration: "2023 — 2025",
-      location: "Morocco",
-      description: "Comprehensive training in web development, mobile applications, digital design principles, and project management.",
+      degree: t('about.cert1_title', { defaultValue: "Certification ISTQB Foundation Level" }),
+      institution: "GASQ",
+      duration: "2024",
+      location: "Maroc",
+      description: "Certification internationale reconnue en tests de logiciels.",
+      status: "Certified",
+      technologies: ["Selenium"],
+      courses: ["Tests Logiciels", "Assurance Qualité", "Automatisation des tests"]
+    },
+    {
+      degree: t('about.edu2_title', { defaultValue: "Master en Marketing Digital et Ingénierie des Affaires" }),
+      institution: t('about.edu2_school', { defaultValue: "ENCG Fès" }),
+      duration: t('about.edu2_date', { defaultValue: "2022" }),
+      location: "Fès, Maroc",
+      description: "Formation avancée en marketing numérique, SEO, et stratégies d'acquisition.",
       status: "Completed",
-      technologies: ["React", "Node.js", "JavaScript", "Python", "PostgreSQL", "Figma"],
-      courses: ["Frontend Development", "UI/UX", "Project Management"]
-    }
+      technologies: ["Figma"],
+      courses: ["Email Marketing", "SEO Analytics", "Inbound Marketing"]
+    },
+    {
+      degree: t('about.edu3_title', { defaultValue: "Bachelor en Informatique et Réseaux" }),
+      institution: t('about.edu3_school', { defaultValue: "Groupe EFET, Fès" }),
+      duration: t('about.edu3_date', { defaultValue: "2020" }),
+      location: "Fès, Maroc",
+      description: "Formation complète en informatique, réseaux et développement.",
+      status: "Completed",
+      technologies: ["JavaScript", "PostgreSQL"],
+      courses: ["Développement Web", "Administration Réseaux"]
+    },
   ];
 
   const displayedExperiences = showAll ? experiences : experiences.slice(0, 2);
-  const displayedEducation = showAll ? education : education;
+  const displayedEducation = showAll ? education : education.slice(0, 2);
 
   const Card = ({ children, className = "" }) => (
     <div className={`cursor-target rounded-2xl border backdrop-blur-sm transition-all duration-500 hover:scale-[1.02] hover:shadow-xl ${className}`}>
@@ -207,7 +232,7 @@ const WorkHistory = () => {
           </h2>
 
           <p className={`max-w-2xl mx-auto text-xl leading-relaxed ${drakeMode ? 'text-gray-300' : 'text-gray-600'}`}>
-            {t('about.subtitle')}
+            {t('about.subtitle', { defaultValue: "Mon parcours professionnel et académique." })}
           </p>
         </div>
 
@@ -289,7 +314,7 @@ const WorkHistory = () => {
                     <h4 className={`flex items-center gap-2 text-sm font-semibold uppercase tracking-wider mb-3 ${drakeMode ? 'text-blue-400' : 'text-blue-600'
                       }`}>
                       <Award className="w-4 h-4" />
-                      Key Courses
+                      Matières Clés
                     </h4>
                     <div className="flex flex-wrap gap-2">
                       {edu.courses.map((course, i) => (
@@ -341,11 +366,13 @@ const WorkHistory = () => {
                     <div className="flex items-start gap-4 mb-3">
                       {/* Company Logo */}
                       <div className="flex-shrink-0">
-                        <img
-                          src={companyLogo}
-                          alt={`${exp.company} logo`}
-                          className="w-12 h-12"
-                        />
+                        {companyLogo && (
+                          <img
+                            src={companyLogo}
+                            alt={`${exp.company} logo`}
+                            className="w-12 h-12 rounded"
+                          />
+                        )}
                       </div>
 
                       <div className="flex-1">
@@ -388,7 +415,7 @@ const WorkHistory = () => {
                       <h4 className={`flex items-center gap-2 text-sm font-semibold uppercase tracking-wider mb-3 ${drakeMode ? 'text-blue-400' : 'text-blue-600'
                         }`}>
                         <Award className="w-4 h-4" />
-                        Key Achievements
+                        Réalisations
                       </h4>
                       <div className="space-y-2">
                         {exp.achievements.map((achievement, i) => (
@@ -408,7 +435,7 @@ const WorkHistory = () => {
                       <h4 className={`flex items-center gap-2 text-sm font-semibold uppercase tracking-wider mb-3 ${drakeMode ? 'text-blue-400' : 'text-blue-600'
                         }`}>
                         <Code className="w-4 h-4" />
-                        Tech Stack
+                        Technologies
                       </h4>
                       <TechStack technologies={exp.technologies} />
                     </div>
@@ -419,14 +446,14 @@ const WorkHistory = () => {
           </div>
         )}
 
-        {/* Show More Button for Work */}
-        {activeSection === 'work' && experiences.length > 2 && (
+        {/* Show More Button (ykhdem l Education w Work) */}
+        {((activeSection === 'work' && experiences.length > 2) || (activeSection === 'education' && education.length > 2)) && (
           <div className="text-center mt-12">
             <button
               onClick={() => setShowAll(!showAll)}
               className={`cursor-target px-8 py-3 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 ${drakeMode ? 'bg-blue-500 text-white hover:bg-blue-600 shadow-lg shadow-blue-500/25' : 'bg-blue-500 text-white hover:bg-blue-600 shadow-lg shadow-blue-500/25'}`}
             >
-              {showAll ? t('about.show_less') : t('about.view_all_experiences')}
+              {showAll ? t('about.show_less', { defaultValue: "Voir moins" }) : t('about.view_all_experiences', { defaultValue: "Voir tout" })}
             </button>
           </div>
         )}
@@ -435,8 +462,8 @@ const WorkHistory = () => {
         <div className="mt-20">
           <div className={`text-center mb-8 ${drakeMode ? 'text-gray-300' : 'text-gray-600'
             }`}>
-            <h3 className="text-xl font-semibold mb-2 cursor-target">Technologies I Work With</h3>
-            <p className="text-sm cursor-target">Trusted by developers and companies worldwide</p>
+            <h3 className="text-xl font-semibold mb-2 cursor-target">Technologies avec lesquelles je travaille</h3>
+            <p className="text-sm cursor-target">Toujours à jour avec les derniers outils</p>
           </div>
 
           <div className="cursor-target">

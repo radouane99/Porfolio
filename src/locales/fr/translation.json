@@ -68,7 +68,7 @@
     "show_less": "Voir moins"
   },
   "footer": {
-    "copyright": "© {{year}} ZOUBAA Mohammed. Tous droits réservés."
+    "copyright": "© {{year}} El-ASRI Radouane. Tous droits réservés."
   },
   "form": {
     "full_name": "Nom complet",
@@ -84,7 +84,7 @@
     "french": "Français"
   },
   "home": {
-    "greeting": "Salut ! Je suis ZOUBAA Mohammed",
+    "greeting": "Salut ! Je suis El-ASRI Radouane",
     "wave_alt": "Salutation",
     "intro": "Développeur full-stack et étudiant en génie informatique, passionné par la création d'applications web modernes avec React, Node.js et les pratiques DevOps.",
     "contact_button": "Contactez-moi",
