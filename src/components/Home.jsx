@@ -45,7 +45,7 @@ export default function Home() {
           <div className="cursor-target">
             <h1 className={`flex items-end justify-center md:justify-start gap-2 text-xl md:text-2xl mb-3 font-medium ${drakeMode ? 'text-white' : 'text-gray-900'
               }`}>
-              {t('home.greeting', { defaultValue: "Hi! I'm ZOUBAA Mohammed" })}
+              {t('home.greeting', { defaultValue: "Hi! I'm Radouane El-ASRU" })}
               <img
                 src={handIcon}
                 alt={t('home.wave_alt', { defaultValue: 'Wave' })}

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../contexts/AuthContext'
 import { Mail, Lock, LogIn } from 'lucide-react'
 
-import logoLight from "../../assets/img/1.png"
+import logoLight from "../../assets/img/2.png"
 import logoDark from "../../assets/img/2.png"
 
 function Login() {

@@ -16,7 +16,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
 
   // Check if we're on the portfolio page (home page)
-  const isPortfolioPage = location.pathname === '/' || location.pathname === '/zoubaa';
+  const isPortfolioPage = location.pathname === '/' || location.pathname === '/Portfolio';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -77,7 +77,7 @@ const Navbar = () => {
           >
             <img
               src={drakeMode ? logoDark : logoLight}
-              alt="Zoubaa Logo"
+              alt="EL-ASRI Logo"
               className="h-10 w-auto cursor-pointer transition-all duration-300 transform hover:scale-105"
             />
           </a>
@@ -106,9 +106,9 @@ const Navbar = () => {
               return (
                 <li key={item} className="cursor-target">
                   <a
-                    href="/zoubaa/certificates"
+                    href="/Portfolio/certificates"
                     onClick={(e) => {
-                      if (location.pathname === '/certificates' || location.pathname === '/zoubaa/certificates') {
+                      if (location.pathname === '/certificates' || location.pathname === '/Portfolio/certificates') {
                         e.preventDefault();
                       }
                     }}
@@ -322,9 +322,9 @@ const Navbar = () => {
                 return (
                   <a
                     key={item}
-                    href="/zoubaa/certificates"
+                    href="/Portfolio/certificates"
                     onClick={(e) => {
-                      if (location.pathname === '/certificates' || location.pathname === '/zoubaa/certificates') {
+                      if (location.pathname === '/certificates' || location.pathname === '/Portfolio/certificates') {
                         e.preventDefault();
                       }
                     }}

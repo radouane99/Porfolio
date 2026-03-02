@@ -73,7 +73,7 @@ const Preloader = () => {
           <div className="relative">
             <img
               src={drakeMode ? logoDark : logoLight}
-              alt="Zoubaa"
+              alt="El-ASRI"
               className="h-12 w-auto mx-auto filter"
               style={{
                 filter: `drop-shadow(0 4px 12px ${drakeMode ? 'rgba(96, 165, 250, 0.2)' : 'rgba(37, 99, 235, 0.15)'})`

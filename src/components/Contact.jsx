@@ -95,19 +95,7 @@ const Contact = () => {
       name: "LinkedIn",
       url: "https://linkedin.com/in/radouane-elasri",
       color: "hover:text-blue-400"
-    },
-    // {
-    //   icon: <Twitter className="w-5 h-5" />,
-    //   name: "Twitter",
-    //   url: "https://twitter.com/zoubaa",
-    //   color: "hover:text-cyan-400"
-    // },
-    // {
-    //   icon: <Instagram className="w-5 h-5" />,
-    //   name: "Instagram",
-    //   url: "https://instagram.com/zoubaa",
-    //   color: "hover:text-pink-400"
-    // }
+    }
   ];
 
   const quickLinks = [
