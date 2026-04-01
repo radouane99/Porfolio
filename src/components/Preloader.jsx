@@ -70,15 +70,20 @@ const Preloader = () => {
         {/* Logo with Elegant Animation */}
         <div className={`transition-all duration-700 ${isExiting ? 'scale-90 opacity-0 -translate-y-4' : 'scale-100 opacity-100 translate-y-0'
           }`}>
-          <div className="relative">
-            <img
-              src={drakeMode ? logoDark : logoLight}
-              alt="El-ASRI"
-              className="h-12 w-auto mx-auto filter"
-              style={{
-                filter: `drop-shadow(0 4px 12px ${drakeMode ? 'rgba(96, 165, 250, 0.2)' : 'rgba(37, 99, 235, 0.15)'})`
-              }}
-            />
+          <div className="flex items-center justify-center gap-2">
+            <div className={`flex items-center justify-center w-12 h-12 rounded-xl border-2 shadow-lg ${
+              drakeMode ? 'bg-violet-500/10 border-violet-500/30 shadow-violet-500/20' : 'bg-violet-50 border-violet-200 shadow-violet-200/50'
+            }`}>
+              <span className={`font-bold text-3xl ${drakeMode ? 'text-violet-400' : 'text-violet-600'}`}>R</span>
+            </div>
+            <div className="flex flex-col leading-tight text-left">
+              <span className={`text-3xl font-black tracking-tighter ${
+                drakeMode ? 'text-white' : 'text-gray-900'
+              }`}>
+                EL-ASRI
+              </span>
+              <div className="h-1.5 w-full bg-gradient-to-r from-violet-500 to-pink-500 rounded-full" />
+            </div>
           </div>
         </div>
 
