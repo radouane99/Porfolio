@@ -60,7 +60,7 @@ function Sidebar({ currentPath, onNavigate, onSignOut, user, isMobile = false, o
           {isMobile && (
             <button
               onClick={onClose}
-              className={`cursor-target p-2 rounded-lg hover:bg-opacity-10 transition-all ${
+              className={`cursor-target p-2 rounded-xl hover:bg-opacity-10 transition-all ${
                 isDarkMode 
                   ? 'text-white hover:bg-white' 
                   : 'text-gray-700 hover:bg-gray-200'
@@ -72,8 +72,8 @@ function Sidebar({ currentPath, onNavigate, onSignOut, user, isMobile = false, o
           )}
         </div>
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
-            <span className="text-white font-semibold text-sm">
+          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-violet-500/20">
+            <span className="text-white font-bold text-sm">
               {user?.email?.charAt(0).toUpperCase() || 'U'}
             </span>
           </div>
@@ -102,10 +102,10 @@ function Sidebar({ currentPath, onNavigate, onSignOut, user, isMobile = false, o
               onClick={() => onNavigate(item.path)}
               className={`cursor-target w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 group ${
                 active
-                  ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg shadow-blue-500/25'
+                  ? 'bg-gradient-to-r from-violet-600 to-cyan-500 text-white shadow-lg shadow-violet-500/25'
                   : isDarkMode
                     ? 'text-gray-300 hover:bg-white/10 hover:text-white'
-                    : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+                    : 'text-gray-700 hover:bg-violet-50 hover:text-violet-900'
               }`}
             >
               <Icon 
@@ -137,8 +137,8 @@ function Sidebar({ currentPath, onNavigate, onSignOut, user, isMobile = false, o
           onClick={onSignOut}
           className={`cursor-target w-full flex items-center gap-3 px-4 py-3 rounded-xl border transition-all duration-300 group ${
             isDarkMode
-              ? 'text-red-300 hover:bg-red-600/20 hover:text-red-200 border-red-500/30'
-              : 'text-red-600 hover:bg-red-50 hover:text-red-700 border-red-300'
+              ? 'text-red-300 hover:bg-red-500/10 hover:text-red-200 border-red-500/30'
+              : 'text-red-600 hover:bg-red-50 hover:text-red-700 border-red-200'
           }`}
         >
           <LogOut className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />

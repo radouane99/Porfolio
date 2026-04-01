@@ -135,7 +135,7 @@ function Technologies() {
             className="absolute inset-0 bg-black/50 backdrop-blur-sm"
             onClick={handleCancelDelete}
           />
-          <div className={`relative z-10 w-full max-w-md rounded-2xl p-6 shadow-2xl border transition-colors duration-300 ${isDarkMode
+          <div className={`relative z-10 w-full max-w-md rounded-3xl p-6 shadow-2xl border transition-colors duration-300 ${isDarkMode
               ? 'bg-[#0A1A4D] border-red-500/30'
               : 'bg-white border-red-200'
             }`}>
@@ -156,7 +156,7 @@ function Technologies() {
             <div className="mt-6 flex gap-3">
               <button
                 onClick={handleCancelDelete}
-                className={`cursor-target flex-1 py-2 px-4 rounded-lg border transition-all duration-300 hover:scale-105 ${isDarkMode
+                className={`cursor-target flex-1 py-2 px-4 rounded-xl border transition-all duration-300 hover:scale-105 ${isDarkMode
                     ? 'bg-gray-600/20 hover:bg-gray-600/30 text-gray-300 border-gray-500/30'
                     : 'bg-gray-100 hover:bg-gray-200 text-gray-700 border-gray-300'
                   }`}
@@ -165,7 +165,7 @@ function Technologies() {
               </button>
               <button
                 onClick={handleConfirmDelete}
-                className={`cursor-target flex-1 py-2 px-4 rounded-lg border transition-all duration-300 hover:scale-105 ${isDarkMode
+                className={`cursor-target flex-1 py-2 px-4 rounded-xl border transition-all duration-300 hover:scale-105 ${isDarkMode
                     ? 'bg-red-500/20 hover:bg-red-500/30 text-red-400 border-red-400/30'
                     : 'bg-red-500/20 hover:bg-red-500/30 text-red-700 border-red-400/30'
                   }`}
@@ -183,20 +183,20 @@ function Technologies() {
           <div className="mb-8 flex items-center justify-between">
             <div>
               <div className="cursor-target inline-flex items-center gap-4 mb-6">
-                <div className={`w-12 h-0.5 bg-gradient-to-r ${isDarkMode ? 'from-cyan-400 to-blue-500' : 'from-blue-500 to-cyan-500'
+                <div className={`w-12 h-0.5 bg-gradient-to-r ${isDarkMode ? 'from-cyan-400 to-violet-500' : 'from-violet-500 to-cyan-500'
                   }`}></div>
-                <span className={`text-sm font-semibold tracking-widest uppercase ${isDarkMode ? 'text-cyan-400' : 'text-blue-600'
+                <span className={`text-sm font-semibold tracking-widest uppercase ${isDarkMode ? 'text-cyan-400' : 'text-violet-600'
                   }`}>
                   Tech Stack
                 </span>
-                <div className={`w-12 h-0.5 bg-gradient-to-r ${isDarkMode ? 'from-blue-500 to-cyan-400' : 'from-cyan-500 to-blue-500'
+                <div className={`w-12 h-0.5 bg-gradient-to-r ${isDarkMode ? 'from-violet-500 to-cyan-400' : 'from-cyan-500 to-blue-500'
                   }`}></div>
               </div>
               <h1 className={`text-4xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'
                 }`}>
                 Technologies
               </h1>
-              <p className={`text-lg ${isDarkMode ? 'text-cyan-300' : 'text-gray-700'
+              <p className={`text-lg ${isDarkMode ? 'text-violet-300' : 'text-gray-700'
                 }`}>
                 Manage your technology stack and logos
               </p>
@@ -204,7 +204,7 @@ function Technologies() {
             {!showForm && (
               <button
                 onClick={handleCreate}
-                className="cursor-target flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold hover:shadow-lg hover:shadow-cyan-500/25 transition-all"
+                className="cursor-target flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-semibold hover:shadow-lg hover:shadow-cyan-500/25 transition-all"
               >
                 <Plus className="w-5 h-5" />
                 Add Technology
@@ -225,7 +225,7 @@ function Technologies() {
           {/* Form Modal */}
           {showForm && (
             <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-              <div className={`rounded-2xl border p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto ${isDarkMode ? 'bg-gray-900 border-white/10' : 'bg-white border-blue-200'
+              <div className={`rounded-3xl border p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto ${isDarkMode ? 'bg-[#08080f] border-white/10' : 'bg-white border-slate-200'
                 }`}>
                 <div className="flex items-center justify-between mb-6">
                   <h2 className={`text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'
@@ -234,7 +234,7 @@ function Technologies() {
                   </h2>
                   <button
                     onClick={handleCancel}
-                    className={`p-2 rounded-lg transition-all ${isDarkMode ? 'text-white hover:bg-white/10' : 'text-gray-700 hover:bg-gray-200'
+                    className={`p-2 rounded-xl transition-all ${isDarkMode ? 'text-white hover:bg-white/10' : 'text-gray-700 hover:bg-gray-200'
                       }`}
                   >
                     <X className="w-5 h-5" />
@@ -267,7 +267,7 @@ function Technologies() {
                   </p>
                   <button
                     onClick={handleCreate}
-                    className="cursor-target inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold hover:shadow-lg hover:shadow-cyan-500/25 transition-all"
+                    className="cursor-target inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-semibold hover:shadow-lg hover:shadow-cyan-500/25 transition-all"
                   >
                     <Plus className="w-5 h-5" />
                     Add Your First Technology
@@ -278,9 +278,9 @@ function Technologies() {
                   {technologies.map((tech) => (
                     <div
                       key={tech.id}
-                      className={`cursor-target group relative backdrop-blur-lg rounded-2xl border p-6 transition-all duration-500 transform hover:-translate-y-2 ${isDarkMode
-                          ? 'bg-white/5 border-blue-500/30 hover:border-cyan-400/50 hover:shadow-2xl hover:shadow-cyan-500/10'
-                          : 'bg-white border-blue-200 hover:border-blue-400 hover:shadow-2xl hover:shadow-blue-500/10'
+                      className={`cursor-target group relative backdrop-blur-lg rounded-3xl border p-6 transition-all duration-500 transform hover:-translate-y-2 ${isDarkMode
+                          ? 'bg-white/5 border-white/10 hover:border-violet-500/50 hover:shadow-2xl hover:shadow-violet-500/10'
+                          : 'bg-white/80 border-slate-200 hover:border-violet-300 hover:shadow-2xl hover:shadow-violet-500/5'
                         }`}
                     >
                       {/* Technology Image/Icon */}
@@ -292,7 +292,7 @@ function Technologies() {
                             className="w-20 h-20 object-contain group-hover:scale-110 transition-transform duration-300"
                           />
                         ) : (
-                          <div className="w-20 h-20 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                          <div className="w-20 h-20 rounded-full bg-gradient-to-br from-violet-500 to-cyan-500 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                             <Code className="w-10 h-10 text-white" />
                           </div>
                         )}
@@ -309,9 +309,9 @@ function Technologies() {
                         }`}>
                         <button
                           onClick={() => handleEdit(tech)}
-                          className={`cursor-target p-2 rounded-lg border transition-all ${isDarkMode
-                              ? 'bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 border-blue-500/30'
-                              : 'bg-blue-50 hover:bg-blue-100 text-blue-700 border-blue-200'
+                          className={`cursor-target p-2 rounded-xl border transition-all ${isDarkMode
+                              ? 'bg-violet-600/20 hover:bg-violet-600/30 text-violet-300 border-white/10'
+                              : 'bg-violet-50 hover:bg-violet-100 text-violet-700 border-slate-200'
                             }`}
                           aria-label="Edit technology"
                         >
@@ -319,7 +319,7 @@ function Technologies() {
                         </button>
                         <button
                           onClick={() => handleDeleteClick(tech)}
-                          className={`cursor-target p-2 rounded-lg border transition-all ${isDarkMode
+                          className={`cursor-target p-2 rounded-xl border transition-all ${isDarkMode
                               ? 'bg-red-600/20 hover:bg-red-600/30 text-red-300 border-red-500/30'
                               : 'bg-red-50 hover:bg-red-100 text-red-700 border-red-200'
                             }`}

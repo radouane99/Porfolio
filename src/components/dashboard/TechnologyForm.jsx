@@ -108,7 +108,7 @@ function TechnologyForm({ technology = null, onSave, onCancel, loading = false }
             <button
               type="button"
               onClick={handleRemoveImage}
-              className="absolute top-2 right-2 p-2 rounded-lg bg-red-600/20 hover:bg-red-600/30 text-red-300 border border-red-500/30 transition-all"
+              className="absolute top-2 right-2 p-2 rounded-xl bg-red-600/20 hover:bg-red-600/30 text-red-300 border border-red-500/30 transition-all"
             >
               <X className="w-4 h-4" />
             </button>
@@ -140,7 +140,7 @@ function TechnologyForm({ technology = null, onSave, onCancel, loading = false }
         <button
           type="submit"
           disabled={loading}
-          className="flex-1 px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold hover:shadow-lg hover:shadow-cyan-500/25 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-1 px-6 py-3 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-semibold hover:shadow-lg hover:shadow-cyan-500/25 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {loading ? 'Saving...' : technology ? 'Update Technology' : 'Create Technology'}
         </button>

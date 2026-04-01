@@ -53,9 +53,9 @@ function DashboardLayout() {
             className="absolute inset-0 bg-black/50 backdrop-blur-sm"
             onClick={handleCancelSignOut}
           />
-          <div className={`relative z-10 w-full max-w-md rounded-2xl p-6 shadow-2xl border transition-colors duration-300 ${isDarkMode
+          <div className={`relative z-10 w-full max-w-md rounded-3xl p-6 shadow-2xl border transition-colors duration-300 ${isDarkMode
               ? 'bg-[#0A1A4D] border-cyan-500/30'
-              : 'bg-white border-blue-200'
+              : 'bg-white border-slate-200'
             }`}>
             <div className="text-center">
               <div className={`mx-auto flex items-center justify-center h-12 w-12 rounded-full ${isDarkMode ? 'bg-red-500/20' : 'bg-red-100'
@@ -74,7 +74,7 @@ function DashboardLayout() {
             <div className="mt-6 flex gap-3">
               <button
                 onClick={handleCancelSignOut}
-                className={`cursor-target flex-1 py-2 px-4 rounded-lg border transition-all duration-300 hover:scale-105 ${isDarkMode
+                className={`cursor-target flex-1 py-2 px-4 rounded-xl border transition-all duration-300 hover:scale-105 ${isDarkMode
                     ? 'bg-gray-600/20 hover:bg-gray-600/30 text-gray-300 border-gray-500/30'
                     : 'bg-gray-100 hover:bg-gray-200 text-gray-700 border-gray-300'
                   }`}
@@ -83,7 +83,7 @@ function DashboardLayout() {
               </button>
               <button
                 onClick={handleConfirmSignOut}
-                className={`cursor-target flex-1 py-2 px-4 rounded-lg border transition-all duration-300 hover:scale-105 ${isDarkMode
+                className={`cursor-target flex-1 py-2 px-4 rounded-xl border transition-all duration-300 hover:scale-105 ${isDarkMode
                     ? 'bg-red-500/20 hover:bg-red-500/30 text-red-400 border-red-400/30'
                     : 'bg-red-500/20 hover:bg-red-500/30 text-red-700 border-red-400/30'
                   }`}
@@ -96,8 +96,8 @@ function DashboardLayout() {
       )}
 
       <div className={`flex h-screen overflow-hidden transition-colors duration-300 ${isDarkMode
-          ? 'bg-[#050A30]'
-          : 'bg-[#eff9ff]'
+          ? 'bg-[#08080f]'
+          : 'bg-slate-50'
         }`}>
         {/* Sidebar - Desktop */}
         <aside className="hidden lg:flex lg:flex-shrink-0">
@@ -137,17 +137,17 @@ function DashboardLayout() {
         {/* Main Content Area */}
         <div className="flex flex-col flex-1 overflow-hidden">
           {/* Top Header Bar */}
-          <header className={`backdrop-blur-lg border-b px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between transition-colors duration-300 ${isDarkMode
-              ? 'bg-[#050A30] border-blue-500/30'
-              : 'bg-white/80 border-blue-200 shadow-sm'
+          <header className={`backdrop-blur-xl border-b px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between transition-colors duration-300 z-10 ${isDarkMode
+              ? 'bg-white/5 border-white/10'
+              : 'bg-white/80 border-slate-200 shadow-sm'
             }`}>
             <div className="flex items-center gap-4">
               {/* Mobile Menu Button */}
               <button
                 onClick={() => setSidebarOpen(true)}
-                className={`cursor-target lg:hidden p-2 rounded-lg transition-all duration-300 hover:scale-110 ${isDarkMode
-                    ? 'text-cyan-400 hover:bg-cyan-500/20 border border-cyan-400/30'
-                    : 'text-blue-600 hover:bg-blue-500/20 border border-blue-400/30'
+                className={`cursor-target lg:hidden p-2 rounded-xl border transition-all duration-300 hover:scale-110 ${isDarkMode
+                    ? 'text-white hover:bg-white/10 border-white/20'
+                    : 'text-slate-800 hover:bg-slate-100 border-slate-300'
                   }`}
                 aria-label="Open menu"
               >
@@ -162,7 +162,7 @@ function DashboardLayout() {
                   {location.pathname === '/dashboard/projects' && 'Projects'}
                   {location.pathname === '/dashboard/technologies' && 'Technologies'}
                 </h1>
-                <p className={`text-sm transition-colors duration-300 ${isDarkMode ? 'text-cyan-300' : 'text-blue-600'
+                <p className={`text-sm transition-colors duration-300 ${isDarkMode ? 'text-violet-300' : 'text-violet-600'
                   }`}>
                   {user?.email}
                 </p>
@@ -173,9 +173,9 @@ function DashboardLayout() {
               {/* Theme Toggle */}
               <button
                 onClick={toggleTheme}
-                className={`cursor-target p-2 rounded-lg transition-all duration-300 hover:scale-110 ${isDarkMode
-                    ? 'bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-400 border border-cyan-400/30'
-                    : 'bg-blue-500/20 hover:bg-blue-500/30 text-blue-600 border border-blue-400/30'
+                className={`cursor-target p-2 rounded-xl border transition-all duration-300 hover:scale-110 ${isDarkMode
+                    ? 'bg-white/10 hover:bg-white/20 text-white border-white/20'
+                    : 'bg-slate-100 hover:bg-slate-200 text-slate-800 border-slate-300'
                   }`}
                 aria-label="Toggle theme"
                 title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
@@ -189,9 +189,9 @@ function DashboardLayout() {
 
               <button
                 onClick={() => navigate('/')}
-                className={`cursor-target hidden sm:flex items-center gap-2 px-4 py-2 rounded-lg border transition-all duration-300 hover:scale-105 ${isDarkMode
-                    ? 'bg-gradient-to-r from-cyan-500/20 to-blue-500/20 hover:from-cyan-500/30 hover:to-blue-500/30 text-cyan-400 border-cyan-400/30'
-                    : 'bg-gradient-to-r from-blue-500/20 to-cyan-500/20 hover:from-blue-500/30 hover:to-cyan-500/30 text-blue-600 border-blue-400/30'
+                className={`cursor-target hidden sm:flex items-center gap-2 px-4 py-2 rounded-xl transition-all duration-300 hover:scale-105 ${isDarkMode
+                    ? 'bg-gradient-to-r from-violet-600 to-cyan-500 text-white hover:shadow-lg hover:shadow-cyan-500/25'
+                    : 'bg-gradient-to-r from-violet-500 to-pink-500 text-white hover:shadow-lg hover:shadow-pink-500/25'
                   }`}
               >
                 <Home className="w-4 h-4" />
@@ -200,9 +200,9 @@ function DashboardLayout() {
 
               <button
                 onClick={handleSignOutClick}
-                className={`cursor-target flex items-center gap-2 px-4 py-2 rounded-lg border transition-all duration-300 hover:scale-105 ${isDarkMode
-                    ? 'bg-red-500/20 hover:bg-red-500/30 text-red-400 border-red-400/30'
-                    : 'bg-red-500/20 hover:bg-red-500/30 text-red-700 border-red-400/30'
+                className={`cursor-target flex items-center gap-2 px-4 py-2 rounded-xl border transition-all duration-300 hover:scale-105 ${isDarkMode
+                    ? 'bg-red-500/10 hover:bg-red-500/20 text-red-400 border-red-500/30'
+                    : 'bg-red-50 hover:bg-red-100 text-red-600 border-red-200'
                   }`}
               >
                 <LogOut className="w-4 h-4" />
@@ -212,7 +212,7 @@ function DashboardLayout() {
           </header>
 
           {/* Page Content */}
-          <main className={`flex-1 overflow-y-auto transition-colors duration-300 ${isDarkMode ? 'bg-[#050A30]' : 'bg-[#eff9ff]'
+          <main className={`flex-1 overflow-y-auto transition-colors duration-300 relative ${isDarkMode ? 'bg-[#08080f]' : 'bg-slate-50'
             }`}>
             <div className="h-full">
               <Outlet />

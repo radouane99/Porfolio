@@ -327,10 +327,10 @@ function ProjectForm({ project = null, onSave, onCancel, loading = false }) {
                   key={tech.id}
                   type="button"
                   onClick={() => handleToggleTechnology(tech.id)}
-                  className={`cursor-target w-full flex items-center gap-3 px-4 py-2 rounded-lg transition-all ${
+                  className={`cursor-target w-full flex items-center gap-3 px-4 py-2 rounded-xl transition-all ${
                     isSelected
-                      ? 'bg-blue-600/30 border-2 border-blue-500/50'
-                      : 'bg-white/5 border-2 border-white/10 hover:border-cyan-400/50'
+                      ? 'bg-violet-600/30 border-2 border-violet-500/50'
+                      : 'bg-white/5 border-2 border-white/10 hover:border-violet-500/50'
                   }`}
                 >
                   {tech.image_url ? (
@@ -346,7 +346,7 @@ function ProjectForm({ project = null, onSave, onCancel, loading = false }) {
                   )}
                   <span className="flex-1 text-left text-white font-medium">{tech.name}</span>
                   {isSelected && (
-                    <Check className="w-5 h-5 text-blue-400" />
+                    <Check className="w-5 h-5 text-violet-400" />
                   )}
                 </button>
               )
@@ -448,7 +448,7 @@ function ProjectForm({ project = null, onSave, onCancel, loading = false }) {
             <button
               type="button"
               onClick={handleRemoveImage}
-              className="absolute top-2 right-2 p-2 rounded-lg bg-red-600/20 hover:bg-red-600/30 text-red-300 border border-red-500/30 transition-all"
+              className="absolute top-2 right-2 p-2 rounded-xl bg-red-600/20 hover:bg-red-600/30 text-red-300 border border-red-500/30 transition-all"
             >
               <X className="w-4 h-4" />
             </button>
@@ -496,7 +496,7 @@ function ProjectForm({ project = null, onSave, onCancel, loading = false }) {
             <button
               type="button"
               onClick={handleClearGallery}
-              className="px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-white text-sm border border-white/20 transition-all"
+              className="px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white text-sm border border-white/20 transition-all"
             >
               Clear gallery selection
             </button>
@@ -532,7 +532,7 @@ function ProjectForm({ project = null, onSave, onCancel, loading = false }) {
         <button
           type="submit"
           disabled={loading}
-          className="flex-1 px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold hover:shadow-lg hover:shadow-cyan-500/25 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-1 px-6 py-3 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-semibold hover:shadow-lg hover:shadow-cyan-500/25 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {loading ? 'Saving...' : project ? 'Update Project' : 'Create Project'}
         </button>
