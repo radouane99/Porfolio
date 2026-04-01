@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { GraduationCap, Briefcase, Calendar, MapPin, Award, Code } from 'lucide-react';
 import LogoLoop from '../hooks/LogoLoop';
 import { useTranslation } from 'react-i18next';
@@ -84,126 +84,139 @@ const getCompanyLogo = (company) =>
 const WorkHistory = () => {
   const { isDarkMode } = useTheme();
   const { t } = useTranslation();
-  const [showAll, setShowAll] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const [activeSection, setActiveSection] = useState('work');
+
+  const sectionRef = useRef(null);
 
   useEffect(() => {
     setIsVisible(true);
+    
+    // Safety fallback: Reveal all items after 1 second even if observer fails
+    const timer = setTimeout(() => {
+      if (sectionRef.current) {
+        sectionRef.current.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+      }
+    }, 1000);
+
+    // Intersection Observer for cards
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.05, rootMargin: '50px' }
+    );
+
+    const revealEls = sectionRef.current?.querySelectorAll('.reveal');
+    if (revealEls) {
+      revealEls.forEach((el) => observer.observe(el));
+    }
+
+    return () => {
+      clearTimeout(timer);
+      observer.disconnect();
+    };
   }, []);
 
   const getTechIcon = (tech) => TECH_ICONS[tech] || null;
 
   const experiences = [
     {
-      role: t('about.exp1_title', { defaultValue: 'Technicien Spécialisé en Développement' }),
-      company: t('about.exp1_company', { defaultValue: 'École Normale Supérieure, Fès' }),
-      duration: t('about.exp1_date', { defaultValue: 'Sept 2024 - Présent' }),
-      location: 'Fès, Maroc',
-      description: t('about.exp1_desc', {
-        defaultValue:
-          "Développement d'une plateforme web pour la digitalisation des tâches académiques et maintenance du parc informatique."
-      }),
+      role: t('about.exp1_title'),
+      company: t('about.exp1_company'),
+      duration: t('about.exp1_date'),
+      location: t('about.location_fes'),
+      description: t('about.exp1_desc'),
       technologies: ['JavaScript', 'PostgreSQL', 'React'],
-      type: 'Full-time',
+      type: t('about.type_fulltime'),
       achievements: [
-        'Participation au développement d’une plateforme web académique',
-        'Maintenance et gestion du parc informatique',
-        'Amélioration des outils numériques internes'
+        t('about.exp1_a1'),
+        t('about.exp1_a2'),
+        t('about.exp1_a3')
       ]
     },
     {
-      role: t('about.exp2_title', { defaultValue: 'Agent Mailer & Développeur' }),
-      company: t('about.exp2_company', { defaultValue: 'E-Market Solutions, Fès' }),
-      duration: t('about.exp2_date', { defaultValue: 'Oct 2019 - Juin 2024' }),
-      location: 'Fès, Maroc',
-      description: t('about.exp2_desc', {
-        defaultValue:
-          "Réalisation de campagnes d'emailing et développement de scripts d'automatisation avec Python (Selenium), JS, HTML et CSS."
-      }),
+      role: t('about.exp2_title'),
+      company: t('about.exp2_company'),
+      duration: t('about.exp2_date'),
+      location: t('about.location_fes'),
+      description: t('about.exp2_desc'),
       technologies: ['Python', 'Selenium', 'JavaScript'],
-      type: 'Full-time',
+      type: t('about.type_fulltime'),
       achievements: [
-        "Réalisation de campagnes d'emailings promotionnels en masse",
-        "Développement de scripts d'automatisation",
-        'Réduction des erreurs humaines via l’automatisation'
+        t('about.exp2_a1'),
+        t('about.exp2_a2'),
+        t('about.exp2_a3')
       ]
     },
     {
-      role: t('about.exp3_title', { defaultValue: 'Développeur WinDev (Stage)' }),
-      company: t('about.exp3_company', { defaultValue: 'InnovaPlus, Fès' }),
-      duration: t('about.exp3_date', { defaultValue: 'Avril 2019 - Juin 2019' }),
-      location: 'Fès, Maroc',
-      description: t('about.exp3_desc', {
-        defaultValue:
-          "Développement d'une application de gestion des congés avec WinDev et SQL Server."
-      }),
+      role: t('about.exp3_title'),
+      company: t('about.exp3_company'),
+      duration: t('about.exp3_date'),
+      location: t('about.location_fes'),
+      description: t('about.exp3_desc'),
       technologies: ['SQL Server', 'C#'],
-      type: 'Internship',
+      type: t('about.type_internship'),
       achievements: [
-        "Développement d'une application de gestion des congés",
-        'Génération de rapports et statistiques',
-        'Synchronisation avec le logiciel de paie'
+        t('about.exp3_a1'),
+        t('about.exp3_a2'),
+        t('about.exp3_a3')
       ]
     }
   ];
 
   const education = [
     {
-      degree: t('about.edu1_title', { defaultValue: "Ingénieur d'État en Génie Informatique" }),
-      institution: t('about.edu1_school', { defaultValue: 'Université Privée de Fès' }),
-      duration: t('about.edu1_date', { defaultValue: '2025 - 2028' }),
-      location: 'Fès, Maroc',
-      description:
-        "Formation d'Ingénieur d'État axée sur les technologies de pointe et l'ingénierie logicielle.",
-      status: 'In Progress',
+      degree: t('about.edu1_title'),
+      institution: t('about.edu1_school'),
+      duration: t('about.edu1_date'),
+      location: t('about.location_fes'),
+      description: t('about.edu1_desc'),
+      status: t('about.status_progress'),
       technologies: ['Java', 'Python', 'Machine Learning'],
-      courses: ['Génie Logiciel', "Systèmes d'Information", 'Bases de Données']
+      courses: [t('about.edu1_c1'), t('about.edu1_c2'), t('about.edu1_c3')]
     },
     {
-      degree: t('about.cert1_title', { defaultValue: 'Certification ISTQB Foundation Level' }),
+      degree: t('about.cert1_title'),
       institution: 'GASQ',
       duration: '2024',
       location: 'Maroc',
-      description: 'Certification internationale reconnue en tests de logiciels.',
-      status: 'Certified',
+      description: t('about.cert1_desc'),
+      status: t('about.status_certified'),
       technologies: ['Selenium'],
-      courses: ['Tests Logiciels', 'Assurance Qualité', 'Automatisation des tests']
+      courses: [t('about.cert1_c1'), t('about.cert1_c2'), t('about.cert1_c3')]
     },
     {
-      degree: t('about.edu2_title', {
-        defaultValue: 'Master en Marketing Digital et Ingénierie des Affaires'
-      }),
-      institution: t('about.edu2_school', { defaultValue: 'ENCG Fès' }),
-      duration: t('about.edu2_date', { defaultValue: '2022' }),
-      location: 'Fès, Maroc',
-      description:
-        'Formation avancée en marketing numérique, SEO, et stratégies d’acquisition.',
-      status: 'Completed',
+      degree: t('about.edu2_title'),
+      institution: t('about.edu2_school'),
+      duration: t('about.edu2_date'),
+      location: t('about.location_fes'),
+      description: t('about.edu2_desc'),
+      status: t('about.status_completed'),
       technologies: ['Figma'],
-      courses: ['Email Marketing', 'SEO Analytics', 'Inbound Marketing']
+      courses: [t('about.edu2_c1'), t('about.edu2_c2'), t('about.edu2_c3')]
     },
     {
-      degree: t('about.edu3_title', {
-        defaultValue: 'Bachelor en Informatique et Réseaux'
-      }),
-      institution: t('about.edu3_school', { defaultValue: 'Groupe EFET, Fès' }),
-      duration: t('about.edu3_date', { defaultValue: '2020' }),
-      location: 'Fès, Maroc',
-      description: 'Formation complète en informatique, réseaux et développement.',
-      status: 'Completed',
+      degree: t('about.edu3_title'),
+      institution: t('about.edu3_school'),
+      duration: t('about.edu3_date'),
+      location: t('about.location_fes'),
+      description: t('about.edu3_desc'),
+      status: t('about.status_completed'),
       technologies: ['JavaScript', 'PostgreSQL'],
-      courses: ['Développement Web', 'Administration Réseaux']
+      courses: [t('about.edu3_c1'), t('about.edu3_c2')]
     }
   ];
 
-  const displayedExperiences = showAll ? experiences : experiences.slice(0, 2);
-  const displayedEducation = showAll ? education : education.slice(0, 2);
 
   const Card = ({ children, className = '', ...rest }) => (
     <div
       {...rest}
-      className={`cursor-target rounded-2xl border backdrop-blur-sm transition-all duration-500 hover:scale-[1.02] hover:shadow-xl ${className}`}
+      className={`cursor-target rounded-2xl border backdrop-blur-sm transition-all duration-400 ${className}`}
     >
       {children}
     </div>
@@ -216,16 +229,16 @@ const WorkHistory = () => {
         return (
           <div
             key={tech}
-            className={`cursor-target flex items-center gap-2 px-3 py-2 rounded-lg border transition-all duration-300 hover:scale-105 ${
+            className={`cursor-target flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border transition-all duration-300 hover:scale-105 ${
               isDarkMode
-                ? 'border-gray-600 bg-gray-800 hover:border-blue-400/50'
-                : 'border-gray-300 bg-white hover:border-blue-300'
+                ? 'bg-violet-500/10 border-violet-500/20 hover:border-violet-400'
+                : 'bg-violet-50 border-violet-200 hover:border-violet-400'
             }`}
           >
             {techIcon && <img src={techIcon} alt={tech} className="w-4 h-4" />}
             <span
-              className={`text-sm font-medium ${
-                isDarkMode ? 'text-gray-300' : 'text-gray-600'
+              className={`text-xs font-semibold ${
+                isDarkMode ? 'text-violet-300' : 'text-violet-700'
               }`}
             >
               {tech}
@@ -237,274 +250,204 @@ const WorkHistory = () => {
   );
 
   return (
-    <div className={`min-h-screen py-20 px-4 sm:px-6 relative ${isDarkMode ? 'bg-[#050A30]' : 'bg-[#eff9ff]'}`}>
+    <div 
+      ref={sectionRef}
+      className={`min-h-screen py-20 px-4 sm:px-6 relative ${isDarkMode ? 'bg-[#08080f]' : 'bg-[#f8f7ff]'}`}
+      style={isDarkMode ? {
+        background: 'radial-gradient(ellipse 80% 50% at 50% 0%, rgba(139,92,246,0.1) 0%, transparent 60%), #08080f'
+      } : {
+        background: 'radial-gradient(ellipse 80% 50% at 50% 0%, rgba(139,92,246,0.06) 0%, transparent 60%), #f8f7ff'
+      }}
+    >
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Header */}
-        <div className="text-center mb-20">
-          <div className="cursor-target inline-flex items-center gap-4 mb-6">
-            <div className={`w-16 h-0.5 bg-gradient-to-r ${isDarkMode ? 'from-cyan-400 to-blue-500' : 'from-blue-500 to-cyan-500'}`} />
-            <span className={`text-sm font-semibold tracking-widest uppercase ${isDarkMode ? 'text-cyan-400' : 'text-blue-600'}`}>
-              {t('about.my_journey')}
-            </span>
-            <div className={`w-16 h-0.5 bg-gradient-to-r ${isDarkMode ? 'from-blue-500 to-cyan-400' : 'from-cyan-500 to-blue-500'}`} />
-          </div>
+        <div className="text-center mb-20 reveal">
+          <div className="section-tag mb-6">{t('about.my_journey')}</div>
 
-          <h2 className={`text-5xl md:text-6xl font-bold mb-6 leading-tight ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-            {t('about.title')}
+          <h2 className={`font-head font-bold text-5xl md:text-6xl mb-6 leading-tight`}>
+            <span className={isDarkMode ? 'text-white' : 'text-gray-900'}>{t('about.title')}</span>
           </h2>
 
-          <p className={`max-w-2xl mx-auto text-xl leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-            {t('about.subtitle', { defaultValue: 'Mon parcours professionnel et académique.' })}
+          <p className={`max-w-2xl mx-auto text-lg leading-relaxed ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+            {t('about.subtitle')}
           </p>
         </div>
 
-        {/* Navigation Tabs */}
-        <div className="flex justify-center mb-12">
-          <div className={`cursor-target flex rounded-2xl p-2 backdrop-blur-sm border ${isDarkMode ? 'bg-[#0A1A3A]/80 border-blue-500/30' : 'bg-white/80 border-gray-200'}`}>
-            {[
-              { id: 'work', labelKey: 'about.work_experience', icon: Briefcase },
-              { id: 'education', labelKey: 'about.education', icon: GraduationCap }
-            ].map(({ id, labelKey, icon: Icon }) => (
-              <button
-                key={id}
-                type="button"
-                onClick={() => setActiveSection(id)}
-                className={`cursor-target flex items-center gap-3 px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
-                  activeSection === id
-                    ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/25'
-                    : isDarkMode
-                      ? 'text-gray-300 hover:text-white hover:bg-blue-500/20 hover:shadow-lg hover:shadow-blue-500/10'
-                      : 'text-gray-600 hover:text-gray-900 hover:bg-blue-500/10 hover:shadow-lg hover:shadow-blue-500/5'
-                }`}
-              >
-                <Icon className="w-5 h-5" aria-hidden="true" />
-                {t(labelKey)}
-              </button>
-            ))}
-          </div>
-        </div>
+        {/* Sections: Experience & Education */}
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
+          
+          {/* Work Experience Section */}
+          <div className="space-y-8">
+            <div className="flex items-center gap-4 mb-8 reveal">
+              <div className={`p-3 rounded-2xl ${isDarkMode ? 'bg-violet-500/10 text-violet-400' : 'bg-violet-50 text-violet-600'}`}>
+                <Briefcase className="w-8 h-8" />
+              </div>
+              <h3 className={`text-3xl font-bold font-head ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                {t('about.work_experience')}
+              </h3>
+            </div>
 
-        {/* Education Section */}
-        {activeSection === 'education' && (
-          <div className="grid md:grid-cols-2 gap-8">
-            {displayedEducation.map((edu, index) => (
-              <Card
-                key={`${edu.degree}-${edu.institution}`}
-                className={`${isDarkMode ? 'bg-[#0A1A3A] border-blue-500/30 text-white' : 'bg-white border-blue-200 text-gray-900'} ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                }`}
-                style={{ transitionDelay: `${index * 100}ms` }}
-              >
-                {/* Header */}
-                <div className={`p-6 border-b ${isDarkMode ? 'border-blue-500/20' : 'border-blue-200'}`}>
-                  <div className="flex items-start justify-between mb-3">
-                    <div>
-                      <h3 className={`text-xl font-bold mb-1 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{edu.degree}</h3>
-                      <p className={`text-lg font-semibold mb-2 ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`}>{edu.institution}</p>
-                    </div>
-                    <span
-                      className={`cursor-target px-3 py-1 text-sm font-medium rounded-full transition-all duration-300 hover:scale-105 ${
-                        edu.status === 'In Progress'
-                          ? isDarkMode
-                            ? 'bg-blue-500/20 text-blue-300 border border-blue-500/30'
-                            : 'bg-blue-100 text-blue-700 border border-blue-200'
-                          : isDarkMode
-                            ? 'bg-green-500/20 text-green-300 border border-green-500/30'
-                            : 'bg-green-100 text-green-700 border border-green-200'
-                      }`}
-                    >
-                      {edu.status}
-                    </span>
-                  </div>
+            <div className="space-y-8">
+              {experiences.map((exp, index) => {
+                const companyLogo = getCompanyLogo(exp.company);
+                return (
+                  <Card
+                    key={`${exp.role}-${exp.company}`}
+                    className={`card-hover reveal ${isDarkMode ? 'bg-white/4 border-white/8 card-hover-dark text-white' : 'bg-white border-violet-100 card-hover-light text-gray-900'}`}
+                    style={{ transitionDelay: `${index * 80}ms` }}
+                  >
+                    {/* Header with Company Logo */}
+                    <div className={`p-6 border-b ${isDarkMode ? 'border-white/8' : 'border-violet-100'}`}>
+                      <div className="flex items-start gap-4 mb-3">
+                        <div className="flex-shrink-0">
+                          {companyLogo && (
+                            <img src={companyLogo} alt={`${normalizeCompany(exp.company)} logo`} className="w-12 h-12 rounded" />
+                          )}
+                        </div>
 
-                  <div className="flex items-center gap-4 text-sm">
-                    <div className="flex items-center gap-1">
-                      <Calendar className="w-4 h-4" aria-hidden="true" />
-                      <span className={isDarkMode ? 'text-gray-300' : 'text-gray-600'}>{edu.duration}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <MapPin className="w-4 h-4" aria-hidden="true" />
-                      <span className={isDarkMode ? 'text-gray-300' : 'text-gray-600'}>{edu.location}</span>
-                    </div>
-                  </div>
-                </div>
+                        <div className="flex-1">
+                          <h3 className={`text-xl font-bold mb-1 font-head ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{exp.role}</h3>
+                          <p className={`text-base font-semibold mb-2 ${isDarkMode ? 'text-violet-400' : 'text-violet-600'}`}>{exp.company}</p>
+                        </div>
 
-                {/* Content */}
-                <div className="p-6">
-                  <p className={`mb-6 leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>{edu.description}</p>
-
-                  {/* Courses */}
-                  <div className="mb-6">
-                    <h4
-                      className={`flex items-center gap-2 text-sm font-semibold uppercase tracking-wider mb-3 ${
-                        isDarkMode ? 'text-blue-400' : 'text-blue-600'
-                      }`}
-                    >
-                      <Award className="w-4 h-4" aria-hidden="true" />
-                      {t('about.key_courses', { defaultValue: 'Matières Clés' })}
-                    </h4>
-                    <div className="flex flex-wrap gap-2">
-                      {edu.courses.map((course) => (
-                        <span
-                          key={course}
-                          className={`cursor-target px-3 py-1 text-sm rounded-full border transition-all duration-300 hover:scale-105 ${
-                            isDarkMode
-                              ? 'bg-blue-500/10 text-blue-300 border-blue-500/20 hover:border-blue-400'
-                              : 'bg-blue-50 text-blue-700 border-blue-200 hover:border-blue-400'
-                          }`}
-                        >
-                          {course}
+                        <span className={`px-3 py-1 text-xs font-bold rounded-full border ${isDarkMode ? 'bg-violet-500/20 text-violet-300 border-violet-500/30' : 'bg-violet-100 text-violet-700 border-violet-200'}`}>
+                          {exp.type}
                         </span>
-                      ))}
+                      </div>
+
+                      <div className="flex items-center gap-4 text-sm">
+                        <div className="flex items-center gap-1">
+                          <Calendar className="w-4 h-4" />
+                          <span className={isDarkMode ? 'text-gray-300' : 'text-gray-600'}>{exp.duration}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <MapPin className="w-4 h-4" />
+                          <span className={isDarkMode ? 'text-gray-300' : 'text-gray-600'}>{exp.location}</span>
+                        </div>
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Technologies */}
-                  <div>
-                    <h4
-                      className={`flex items-center gap-2 text-sm font-semibold uppercase tracking-wider mb-3 ${
-                        isDarkMode ? 'text-blue-400' : 'text-blue-600'
-                      }`}
-                    >
-                      <Code className="w-4 h-4" aria-hidden="true" />
-                      {t('about.technologies', { defaultValue: 'Technologies' })}
-                    </h4>
-                    <TechStack technologies={edu.technologies} />
-                  </div>
-                </div>
-              </Card>
-            ))}
+                    <div className="p-6">
+                      <p className={`mb-6 leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>{exp.description}</p>
+                      
+                      <div className="mb-6">
+                        <h4 className={`flex items-center gap-2 text-xs font-bold uppercase tracking-wider mb-3 ${isDarkMode ? 'text-violet-400' : 'text-violet-600'}`}>
+                          <Award className="w-3.5 h-3.5" />
+                          {t('about.achievements')}
+                        </h4>
+                        <div className="space-y-2">
+                          {exp.achievements.map((achievement) => (
+                            <div key={achievement} className="flex items-start gap-3 group">
+                              <div className={`w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0 ${isDarkMode ? 'bg-violet-400' : 'bg-violet-500'}`} />
+                              <p className={`flex-1 text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} group-hover:translate-x-1 transition-transform duration-300`}>
+                                {achievement}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div>
+                        <h4 className={`flex items-center gap-2 text-xs font-bold uppercase tracking-wider mb-3 ${isDarkMode ? 'text-violet-400' : 'text-violet-600'}`}>
+                          <Code className="w-3.5 h-3.5" />
+                          {t('about.technologies')}
+                        </h4>
+                        <TechStack technologies={exp.technologies} />
+                      </div>
+                    </div>
+                  </Card>
+                );
+              })}
+            </div>
           </div>
-        )}
 
-        {/* Work Experience Section */}
-        {activeSection === 'work' && (
-          <div className="grid md:grid-cols-2 gap-8">
-            {displayedExperiences.map((exp, index) => {
-              const companyLogo = getCompanyLogo(exp.company);
-              return (
+          {/* Education Section */}
+          <div className="space-y-8">
+            <div className="flex items-center gap-4 mb-8 reveal">
+              <div className={`p-3 rounded-2xl ${isDarkMode ? 'bg-pink-500/10 text-pink-400' : 'bg-pink-50 text-pink-600'}`}>
+                <GraduationCap className="w-8 h-8" />
+              </div>
+              <h3 className={`text-3xl font-bold font-head ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                {t('about.education')}
+              </h3>
+            </div>
+
+            <div className="space-y-8">
+              {education.map((edu, index) => (
                 <Card
-                  key={`${exp.role}-${exp.company}`}
-                  className={`${isDarkMode ? 'bg-[#0A1A3A] border-blue-500/30 text-white' : 'bg-white border-blue-200 text-gray-900'} ${
-                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                  }`}
-                  style={{ transitionDelay: `${index * 100}ms` }}
+                  key={`${edu.degree}-${edu.institution}`}
+                  className={`card-hover reveal ${isDarkMode ? 'bg-white/4 border-white/8 card-hover-dark text-white' : 'bg-white border-violet-100 card-hover-light text-gray-900'}`}
+                  style={{ transitionDelay: `${index * 80}ms` }}
                 >
-                  {/* Header with Company Logo */}
-                  <div className={`p-6 border-b ${isDarkMode ? 'border-blue-500/20' : 'border-blue-200'}`}>
-                    <div className="flex items-start gap-4 mb-3">
-                      {/* Company Logo */}
-                      <div className="flex-shrink-0">
-                        {companyLogo && (
-                          <img src={companyLogo} alt={`${normalizeCompany(exp.company)} logo`} className="w-12 h-12 rounded" />
-                        )}
+                  <div className={`p-6 border-b ${isDarkMode ? 'border-white/8' : 'border-violet-100'}`}>
+                    <div className="flex items-start justify-between mb-3">
+                      <div>
+                        <h3 className={`text-xl font-bold mb-1 font-head ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{edu.degree}</h3>
+                        <p className={`text-base font-semibold mb-2 ${isDarkMode ? 'text-violet-400' : 'text-violet-600'}`}>{edu.institution}</p>
                       </div>
-
-                      <div className="flex-1">
-                        <h3 className={`text-xl font-bold mb-1 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{exp.role}</h3>
-                        <p className={`text-lg font-semibold mb-2 ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`}>{exp.company}</p>
-                      </div>
-
-                      <span
-                        className={`cursor-target px-3 py-1 text-sm font-medium rounded-full transition-all duration-300 hover:scale-105 ${
-                          isDarkMode
-                            ? 'bg-blue-500/20 text-blue-300 border border-blue-500/30'
-                            : 'bg-blue-100 text-blue-700 border border-blue-200'
-                        }`}
-                      >
-                        {exp.type}
+                      <span className={`px-3 py-1 text-xs font-semibold rounded-full border ${
+                        edu.status === 'In Progress'
+                          ? isDarkMode ? 'bg-violet-500/20 text-violet-300 border-violet-500/30' : 'bg-violet-100 text-violet-700 border-violet-200'
+                          : isDarkMode ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30' : 'bg-emerald-100 text-emerald-700 border-emerald-200'
+                      }`}>
+                        {edu.status}
                       </span>
                     </div>
 
                     <div className="flex items-center gap-4 text-sm">
                       <div className="flex items-center gap-1">
-                        <Calendar className="w-4 h-4" aria-hidden="true" />
-                        <span className={isDarkMode ? 'text-gray-300' : 'text-gray-600'}>{exp.duration}</span>
+                        <Calendar className="w-4 h-4" />
+                        <span className={isDarkMode ? 'text-gray-300' : 'text-gray-600'}>{edu.duration}</span>
                       </div>
                       <div className="flex items-center gap-1">
-                        <MapPin className="w-4 h-4" aria-hidden="true" />
-                        <span className={isDarkMode ? 'text-gray-300' : 'text-gray-600'}>{exp.location}</span>
+                        <MapPin className="w-4 h-4" />
+                        <span className={isDarkMode ? 'text-gray-300' : 'text-gray-600'}>{edu.location}</span>
                       </div>
                     </div>
                   </div>
 
-                  {/* Content */}
                   <div className="p-6">
-                    <p className={`mb-6 leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>{exp.description}</p>
-
-                    {/* Achievements */}
+                    <p className={`mb-6 leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>{edu.description}</p>
+                    
                     <div className="mb-6">
-                      <h4
-                        className={`flex items-center gap-2 text-sm font-semibold uppercase tracking-wider mb-3 ${
-                          isDarkMode ? 'text-blue-400' : 'text-blue-600'
-                        }`}
-                      >
-                        <Award className="w-4 h-4" aria-hidden="true" />
-                        {t('about.achievements', { defaultValue: 'Réalisations' })}
+                      <h4 className={`flex items-center gap-2 text-xs font-bold uppercase tracking-wider mb-3 ${isDarkMode ? 'text-violet-400' : 'text-violet-600'}`}>
+                        <Award className="w-3.5 h-3.5" />
+                        {t('about.key_courses')}
                       </h4>
-                      <div className="space-y-2">
-                        {exp.achievements.map((achievement) => (
-                          <div key={achievement} className="flex items-start gap-3 cursor-target group">
-                            <div
-                              className={`w-2 h-2 rounded-full mt-2 transition-all duration-300 group-hover:scale-150 ${
-                                isDarkMode ? 'bg-blue-400' : 'bg-blue-500'
-                              }`}
-                            />
-                            <p
-                              className={`flex-1 text-sm ${
-                                isDarkMode ? 'text-gray-300' : 'text-gray-600'
-                              } group-hover:translate-x-1 transition-transform duration-300`}
-                            >
-                              {achievement}
-                            </p>
-                          </div>
+                      <div className="flex flex-wrap gap-2">
+                        {edu.courses.map((course) => (
+                          <span key={course} className={`px-3 py-1 text-xs rounded-full border transition-all duration-300 hover:scale-105 ${isDarkMode ? 'bg-violet-500/10 text-violet-300 border-violet-500/20 hover:border-violet-400' : 'bg-violet-50 text-violet-700 border-violet-200 hover:border-violet-400'}`}>
+                            {course}
+                          </span>
                         ))}
                       </div>
                     </div>
 
-                    {/* Technologies */}
                     <div>
-                      <h4
-                        className={`flex items-center gap-2 text-sm font-semibold uppercase tracking-wider mb-3 ${
-                          isDarkMode ? 'text-blue-400' : 'text-blue-600'
-                        }`}
-                      >
-                        <Code className="w-4 h-4" aria-hidden="true" />
-                        {t('about.technologies', { defaultValue: 'Technologies' })}
+                      <h4 className={`flex items-center gap-2 text-xs font-bold uppercase tracking-wider mb-3 ${isDarkMode ? 'text-violet-400' : 'text-violet-600'}`}>
+                        <Code className="w-3.5 h-3.5" />
+                        {t('about.technologies')}
                       </h4>
-                      <TechStack technologies={exp.technologies} />
+                      <TechStack technologies={edu.technologies} />
                     </div>
                   </div>
                 </Card>
-              );
-            })}
+              ))}
+            </div>
           </div>
-        )}
 
-        {/* Show More Button */}
-        {((activeSection === 'work' && experiences.length > 2) ||
-          (activeSection === 'education' && education.length > 2)) && (
-          <div className="text-center mt-12">
-            <button
-              type="button"
-              onClick={() => setShowAll(!showAll)}
-              className="cursor-target px-8 py-3 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 bg-blue-500 text-white hover:bg-blue-600 shadow-lg shadow-blue-500/25"
-            >
-              {showAll
-                ? t('about.show_less', { defaultValue: 'Voir moins' })
-                : t('about.view_all_experiences', { defaultValue: 'Voir tout' })}
-            </button>
-          </div>
-        )}
+        </div>
+
+        {/* Removed View All Button - Everything is now visible for clarity */}
 
         {/* Logo Loop Section */}
-        <div className="mt-20">
-          <div className={`text-center mb-8 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-            <h3 className="text-xl font-semibold mb-2 cursor-target">
-              {t('about.tech_title', { defaultValue: 'Technologies avec lesquelles je travaille' })}
+        <div className="mt-20 reveal">
+          <div className={`text-center mb-8`}>
+            <h3 className={`text-xl font-semibold mb-1 font-head ${isDarkMode ? 'text-gray-200' : 'text-gray-800'}`}>
+              {t('about.tech_title')}
             </h3>
-            <p className="text-sm cursor-target">
-              {t('about.tech_subtitle', { defaultValue: 'Toujours à jour avec les derniers outils' })}
+            <p className={`text-sm ${isDarkMode ? 'text-gray-500' : 'text-gray-500'}`}>
+              {t('about.tech_subtitle')}
             </p>
           </div>
 
@@ -518,7 +461,7 @@ const WorkHistory = () => {
               hoverSpeed={0}
               scaleOnHover
               fadeOut
-              fadeOutColor={isDarkMode ? '#050A30' : '#eff9ff'}
+              fadeOutColor={isDarkMode ? '#08080f' : '#f8f7ff'}
               ariaLabel="Technology partners"
             />
           </div>

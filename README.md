@@ -1,6 +1,6 @@
 # EL-ASRI — Professional Portfolio Website
 
-A modern, full-featured portfolio website built with React and Vite, showcasing the work and skills of Mohammed Zoubaa. Features a beautiful single-page design with dark mode, multi-language support, dynamic project management, and a comprehensive admin dashboard.
+A modern, full-featured portfolio website built with React and Vite, showcasing the work and skills of Radouane El-ASRI. Features a beautiful single-page design with dark mode, multi-language support, dynamic project management, and a comprehensive admin dashboard.
 
 
 ## 🌟 Features
@@ -97,7 +97,7 @@ A modern, full-featured portfolio website built with React and Vite, showcasing 
 1. **Clone the repository**
    ```bash
    git clone <repository-url>
-   cd zoubaa
+   cd Portfolio
    ```
 
 2. **Install dependencies**
@@ -137,7 +137,7 @@ GOOGLE_API_KEY=your_google_ai_studio_key (set in Supabase Secrets)
 ## 📁 Project Structure
 
 ```
-zoubaa/
+Portfolio/
 ├── public/                 # Static assets
 ├── src/
 │   ├── assets/
@@ -172,7 +172,7 @@ zoubaa/
 ## 🎨 Customization
 
 ### Profile Photo
-Replace `src/assets/img/zoubaa2.jpg` with your own profile photo. The image should be square or portrait orientation for best results.
+Replace `src/assets/img/Radouane.jpg` with your own profile photo. The image should be square or portrait orientation for best results.
 
 ### Colors & Themes
 - **Light mode background**: `#eff9ff` (Soft Slate Blue)
@@ -195,7 +195,7 @@ Edit translation files in:
 ## 🌐 Deployment
 
 The project is configured for GitHub Pages deployment:
-- Base path: `/zoubaa`
+- Base path: `/`
 - Build output: `dist/`
 - Deploy command: `npm run deploy`
 
@@ -229,11 +229,11 @@ Switch between English and French using the language switcher in the navbar.
 
 ## 📞 Contact
 
-- **Email**: Itsmezoubaa@gmail.com
-- **Phone**: +212 701-230904
+- **Email**: radouane.elasri@usmba.ac.ma
+- **Phone**: +212 6 09 36 53 49
 - **Location**: FEZ, Morocco
-- **GitHub**: [zoubaax](https://github.com/zoubaax)
-- **LinkedIn**: [zoubaa-mohammed-398266350](https://www.linkedin.com/in/zoubaa-mohammed)
+- **GitHub**: [radouane99](https://github.com/radouane99)
+- **LinkedIn**: [radouaneelasri](https://www.linkedin.com/in/radouaneelasri)
 
 ## 📄 License
 
@@ -241,4 +241,4 @@ MIT License - see LICENSE file for details.
 
 ---
 
-Built with ❤️ by Mohammed Zoubaa
+Built with ❤️ by  Radouane EL-ASRI

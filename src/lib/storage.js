@@ -82,6 +82,11 @@ export async function deleteImage(bucket, filePath) {
  */
 export function getImageUrl(bucket, filePath) {
   if (!filePath) return null
+  
+  // If filePath is already a full URL, return it as is
+  if (filePath.startsWith('http://') || filePath.startsWith('https://')) {
+    return filePath
+  }
 
   const { data } = supabase.storage.from(bucket).getPublicUrl(filePath)
   return data.publicUrl

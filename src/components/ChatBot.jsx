@@ -3,16 +3,47 @@ import { MessageSquare, Send, X, Bot, User, Minimize2, Maximize2, Sparkles } fro
 import { motion, AnimatePresence } from 'framer-motion';
 import { supabase } from '../lib/supabase';
 import { useTheme } from '../contexts/ThemeContext';
+import { useTranslation } from 'react-i18next';
+
+const KNOWLEDGE_BASE = {
+  en: {
+    skills: "Radouane is a Full-stack developer skilled in React, Node.js, and DevOps. He is an expert in modern web technologies and UI/UX design.",
+    projects: "He has worked on various projects including Healthcare Management systems, E-Commerce platforms, and AI Content Generators. You can see them in the Projects section!",
+    experience: "He is a Computer Engineering student with experience in 1st year engineering. He focuses on building scalable and maintainable applications.",
+    contact: "You can reach Radouane via the contact form on this page or email him at radouane.elasri@usmba.ac.ma.",
+    default: "I'm not sure about that. I can tell you about Radouane's skills, projects, experience, or how to contact him!"
+  },
+  fr: {
+    skills: "Radouane est un développeur Full-stack compétent en React, Node.js et DevOps. Il est expert en technologies web modernes et en design UI/UX.",
+    projects: "Il a travaillé sur divers projets, notamment des systèmes de gestion de la santé, des plateformes de commerce électronique et des générateurs de contenu IA. Vous pouvez les voir dans la section Projets !",
+    experience: "Il est étudiant en génie informatique. Il se concentre sur la création d'applications évolutives et faciles à maintenir.",
+    contact: "Vous pouvez contacter Radouane via le formulaire de contact sur cette page ou lui envoyer un e-mail à radouane.elasri@usmba.ac.ma.",
+    default: "Je ne suis pas sûr de cela. Je peux vous parler des compétences, des projets, de l'expérience de Radouane ou de la manière de le contacter !"
+  }
+};
 
 const ChatBot = () => {
+    const { t, i18n } = useTranslation();
     const { isDarkMode: drakeMode } = useTheme();
+    const lang = (i18n.language || 'en').startsWith('fr') ? 'fr' : 'en';
+
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState([
         {
             role: 'assistant',
-            content: "Hello! 👋 I'm your guide to Mohammed's portfolio. I can tell you about his skills, projects, experience, and more. What would you like to know?"
+            content: t('chatbot.greeting')
         }
     ]);
+
+    useEffect(() => {
+        setMessages(prev => {
+            const newMessages = [...prev];
+            if (newMessages.length > 0 && newMessages[0].role === 'assistant') {
+                newMessages[0].content = t('chatbot.greeting');
+            }
+            return newMessages;
+        });
+    }, [i18n.language, t]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [isTyping, setIsTyping] = useState(false);
@@ -59,22 +90,34 @@ const ChatBot = () => {
         setIsTyping(true);
 
         try {
+            // Attempt to use Supabase Edge Function
             const { data, error } = await supabase.functions.invoke('portfolio-chat', {
                 body: { message: userMessage, history: messages }
             });
 
             if (error) throw error;
-
-            // Simulate typing delay for better UX
+            
             await new Promise(resolve => setTimeout(resolve, 800));
-
             setMessages(prev => [...prev, { role: 'assistant', content: data.reply }]);
         } catch (error) {
-            console.error('Chat Error:', error);
-            setMessages(prev => [...prev, {
-                role: 'assistant',
-                content: "I'm having trouble connecting right now. Feel free to reach out to Mohammed directly via the contact form or email!"
-            }]);
+            console.warn('Supabase Chat Error, using local fallback:', error);
+            
+            // Local Fallback Logic
+            await new Promise(resolve => setTimeout(resolve, 800));
+            let reply = KNOWLEDGE_BASE[lang].default;
+            const lowerMsg = userMessage.toLowerCase();
+            
+            if (lowerMsg.includes('skill') || lowerMsg.includes('compétence') || lowerMsg.includes('tech')) {
+                reply = KNOWLEDGE_BASE[lang].skills;
+            } else if (lowerMsg.includes('project') || lowerMsg.includes('projet')) {
+                reply = KNOWLEDGE_BASE[lang].projects;
+            } else if (lowerMsg.includes('experience') || lowerMsg.includes('expérience') || lowerMsg.includes('parcours')) {
+                reply = KNOWLEDGE_BASE[lang].experience;
+            } else if (lowerMsg.includes('contact') || lowerMsg.includes('email') || lowerMsg.includes('joindre')) {
+                reply = KNOWLEDGE_BASE[lang].contact;
+            }
+            
+            setMessages(prev => [...prev, { role: 'assistant', content: reply }]);
         } finally {
             setIsLoading(false);
             setIsTyping(false);
@@ -134,10 +177,10 @@ const ChatBot = () => {
     const isMobile = windowWidth < 640;
 
     const quickQuestions = [
-        "Tell me about Mohammed's skills",
-        "What projects has he worked on?",
-        "What's his experience?",
-        "How can I contact him?"
+        t('chatbot.skills_q'),
+        t('chatbot.projects_q'),
+        t('chatbot.experience_q'),
+        t('chatbot.contact_q')
     ];
 
     // Responsive chat position variants
@@ -278,7 +321,7 @@ const ChatBot = () => {
                                     </motion.div>
                                     <div>
                                         <div className="flex items-center gap-1 sm:gap-2">
-                                            <h3 className="font-bold text-xs sm:text-sm">Portfolio Assistant</h3>
+                                            <h3 className="font-bold text-xs sm:text-sm">{t('chatbot.assistant_title')}</h3>
                                             <Sparkles className="w-3 h-3 text-yellow-300 hidden sm:block" />
                                         </div>
                                         <div className="flex items-center gap-1 sm:gap-1.5">
@@ -287,7 +330,7 @@ const ChatBot = () => {
                                                 transition={{ duration: 2, repeat: Infinity }}
                                                 className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full"
                                             ></motion.span>
-                                            <span className="text-[9px] sm:text-[10px] opacity-90 uppercase tracking-wider font-semibold">Ready to assist</span>
+                                            <span className="text-[9px] sm:text-[10px] opacity-90 uppercase tracking-wider font-semibold">{t('chatbot.ready')}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -454,7 +497,7 @@ const ChatBot = () => {
                                                 type="text"
                                                 value={input}
                                                 onChange={(e) => setInput(e.target.value)}
-                                                placeholder="Ask about Mohammed's skills, projects, or experience..."
+                                                placeholder={t('chatbot.placeholder')}
                                                 className="flex-1 bg-transparent border-none focus:ring-0 text-xs sm:text-sm p-1.5 sm:p-2 outline-none placeholder-gray-400"
                                                 onKeyDown={(e) => {
                                                     if (e.key === 'Enter' && !e.shiftKey) {
@@ -480,7 +523,7 @@ const ChatBot = () => {
                                             </motion.button>
                                         </div>
                                         <p className={`text-[9px] sm:text-[10px] mt-1.5 sm:mt-2 text-center opacity-60 ${drakeMode ? 'text-cyan-300/60' : 'text-blue-600/60'}`}>
-                                            {isMobile ? '💡 Ask specific questions' : '💡 Tip: Try asking specific questions for detailed responses'}
+                                            {t('chatbot.thinking')}
                                         </p>
                                     </motion.form>
                                 </>
