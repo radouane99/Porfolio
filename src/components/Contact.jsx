@@ -66,13 +66,13 @@ const Contact = () => {
   const contactInfo = [
     {
       icon: <Mail className="w-5 h-5" />,
-      label: t('contact.email_label'),
+      label: t('email'),
       value: "radouane.elasri@usmba.ac.ma",
       link: "mailto:radouane.elasri@usmba.ac.ma"
     },
     {
       icon: <Phone className="w-5 h-5" />,
-      label: t('contact.phone_label'),
+      label: t('phone'),
       value: "+212 609365349",
       link: "tel:+212609365349"
     },
@@ -120,18 +120,18 @@ const Contact = () => {
           {/* Header */}
           <div className="text-center mb-16">
             <div className="reveal">
-            <div className="section-tag mb-6">
-              {t('contact.get_in_touch')}
+              <div className="section-tag mb-6">
+                {t('contact.get_in_touch')}
+              </div>
+
+              <h2 className={`font-head font-bold text-4xl md:text-5xl mb-6 ${drakeMode ? 'text-white' : 'text-gray-900'}`}>
+                {t('contact.work_together')}
+              </h2>
+
+              <p className={`max-w-2xl mx-auto text-lg md:text-xl leading-relaxed ${drakeMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                {t('contact.subtitle')}
+              </p>
             </div>
-
-            <h2 className={`font-head font-bold text-4xl md:text-5xl mb-6 ${drakeMode ? 'text-white' : 'text-gray-900'}`}>
-              {t('contact.work_together')}
-            </h2>
-
-            <p className={`max-w-2xl mx-auto text-lg md:text-xl leading-relaxed ${drakeMode ? 'text-gray-400' : 'text-gray-600'}`}>
-              {t('contact.subtitle')}
-            </p>
-          </div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
@@ -183,11 +183,11 @@ const Contact = () => {
               </div>
 
               {/* Availability Status */}
-                <div className={`p-6 rounded-2xl border ${drakeMode
-                  ? 'bg-emerald-500/10 border-emerald-500/30'
-                  : 'bg-emerald-50 border-emerald-200'
-                  }`}>
-                  <div className="flex items-center gap-3 mb-2">
+              <div className={`p-6 rounded-2xl border ${drakeMode
+                ? 'bg-emerald-500/10 border-emerald-500/30'
+                : 'bg-emerald-50 border-emerald-200'
+                }`}>
+                <div className="flex items-center gap-3 mb-2">
                   <div className="relative w-3 h-3">
                     <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
                     <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500" />
