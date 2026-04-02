@@ -79,6 +79,7 @@
     "work_experience": "Work Experience",
     "education": "Education",
     "view_all_experiences": "View All Experiences",
+    "view_all_education": "View All Education",
     "show_less": "Show Less",
     "location_fes": "Fez, Morocco",
     "type_fulltime": "Full-time",
@@ -136,7 +137,14 @@
     "edu3_date": "2020",
     "edu3_desc": "Comprehensive training in computer science, networks and development.",
     "edu3_c1": "Web Development",
-    "edu3_c2": "Network Administration"
+    "edu3_c2": "Network Administration",
+    "edu4_title": "Specialized Technician in IT Development",
+    "edu4_school": "ISTA NTIC Fez",
+    "edu4_date": "2017 - 2019",
+    "edu4_desc": "In-depth training in software development, object-oriented design, and database management.",
+    "edu4_c1": "Programming Languages (C/C#/ASP.net)",
+    "edu4_c2": "Web & Mobile Development",
+    "edu4_c3": "UML & SQL Databases"
   },
   "form": {
     "full_name": "Full Name",

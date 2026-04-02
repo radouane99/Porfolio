@@ -75,6 +75,7 @@
     "work_experience": "Expérience Professionnelle",
     "education": "Éducation",
     "view_all_experiences": "Voir toutes les expériences",
+    "view_all_education": "Voir toutes les formations",
     "show_less": "Voir moins",
     "location_fes": "Fès, Maroc",
     "type_fulltime": "Temps plein",
@@ -132,7 +133,14 @@
     "edu3_date": "2020",
     "edu3_desc": "Formation complète en informatique, réseaux et développement.",
     "edu3_c1": "Développement Web",
-    "edu3_c2": "Administration Réseaux"
+    "edu3_c2": "Administration Réseaux",
+    "edu4_title": "Technicien Spécialisé en Développement Informatique",
+    "edu4_school": "ISTA NTIC Fès",
+    "edu4_date": "2017 - 2019",
+    "edu4_desc": "Formation approfondie en développement logiciel, conception orientée objet et bases de données.",
+    "edu4_c1": "Langages de Programmation (C/C#/ASP.net)",
+    "edu4_c2": "Développement Web & Mobile",
+    "edu4_c3": "UML & Bases de données SQL"
   },
   "form": {
     "full_name": "Nom complet",

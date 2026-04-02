@@ -28,6 +28,10 @@ import LOGOENS from '../assets/img/LOGO-FMPDF.png';
 import EMarketLogo from '../assets/img/emarket.jpg';
 import NewDev from '../assets/img/NewDev.jpeg'; // Utilisé pour InnovaPlus (à remplacer par le vrai logo si dispo)
 import ISTQBLogo from '../assets/img/ISTQB.png';
+import upfLogo from '../assets/img/upf.png';
+import encgLogo from '../assets/img/encg.png';
+import efetLogo from '../assets/img/efet.png';
+import ofpptLogo from '../assets/img/ofppt.png';
 
 // Défilement logos tech (optionnel; peut être retiré si tu unifies tout en local)
 import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiNodedotjs, SiMongodb, SiFigma, SiGithub } from 'react-icons/si';
@@ -75,7 +79,15 @@ const COMPANY_LOGOS = {
   'École Normale Supérieure': LOGOENS,
   'E-Market Solutions': EMarketLogo,
   InnovaPlus: NewDev,
-  GASQ: ISTQBLogo
+  GASQ: ISTQBLogo,
+  'Private University of Fez': upfLogo,
+  'Université Privée de Fès': upfLogo,
+  'ENCG Fez': encgLogo,
+  'ENCG Fès': encgLogo,
+  'EFET Group, Fez': efetLogo,
+  'EFET Groupe, Fès': efetLogo,
+  'ISTA NTIC Fez': ofpptLogo,
+  'ISTA NTIC Fès': ofpptLogo
 };
 
 const getCompanyLogo = (company) =>
@@ -85,6 +97,7 @@ const WorkHistory = () => {
   const { isDarkMode } = useTheme();
   const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
+  const [showAllEducation, setShowAllEducation] = useState(false);
 
   const sectionRef = useRef(null);
 
@@ -209,6 +222,16 @@ const WorkHistory = () => {
       status: t('about.status_completed'),
       technologies: ['JavaScript', 'PostgreSQL'],
       courses: [t('about.edu3_c1'), t('about.edu3_c2')]
+    },
+    {
+      degree: t('about.edu4_title'),
+      institution: t('about.edu4_school'),
+      duration: t('about.edu4_date'),
+      location: t('about.location_fes'),
+      description: t('about.edu4_desc'),
+      status: t('about.status_completed'),
+      technologies: ['.NET', 'C#'],
+      courses: [t('about.edu4_c1'), t('about.edu4_c2'), t('about.edu4_c3')]
     }
   ];
 
@@ -373,12 +396,12 @@ const WorkHistory = () => {
             </div>
 
             <div className="space-y-8">
-              {education.map((edu, index) => {
+              {(showAllEducation ? education : education.slice(0, 3)).map((edu, index) => {
                 const institutionLogo = getCompanyLogo(edu.institution);
                 return (
                 <Card
                   key={`${edu.degree}-${edu.institution}`}
-                  className={`card-hover reveal ${isDarkMode ? 'bg-white/4 border-white/8 card-hover-dark text-white' : 'bg-white border-violet-100 card-hover-light text-gray-900'}`}
+                  className={`card-hover reveal visible ${isDarkMode ? 'bg-white/4 border-white/8 card-hover-dark text-white' : 'bg-white border-violet-100 card-hover-light text-gray-900'}`}
                   style={{ transitionDelay: `${index * 80}ms` }}
                 >
                   <div className={`p-6 border-b ${isDarkMode ? 'border-white/8' : 'border-violet-100'}`}>
@@ -444,6 +467,23 @@ const WorkHistory = () => {
               );
               })}
             </div>
+
+            {education.length > 3 && (
+              <div className="flex justify-center mt-6">
+                <button
+                  onClick={() => setShowAllEducation(!showAllEducation)}
+                  className={`
+                    px-6 py-2.5 rounded-full font-bold text-sm transition-all duration-300
+                    flex items-center gap-2
+                    ${isDarkMode 
+                      ? 'bg-pink-500/10 text-pink-300 hover:bg-pink-500/20 border border-pink-500/30' 
+                      : 'bg-pink-50 text-pink-600 hover:bg-pink-100 border border-pink-200'}
+                  `}
+                >
+                  {showAllEducation ? t('about.show_less') : t('about.view_all_education')}
+                </button>
+              </div>
+            )}
           </div>
 
         </div>
