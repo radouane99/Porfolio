@@ -84,7 +84,7 @@ function Certificates() {
           true // delete old image
         )
         if (updateError) {
-          setError('Failed to update certificate')
+          setError(`Failed to update certificate: ${updateError.message || JSON.stringify(updateError)}`)
           console.error(updateError)
         } else {
           setShowForm(false)
@@ -95,7 +95,7 @@ function Certificates() {
         // Create new certificate
         const { data, error: createError } = await createCertificate(formData, imageFile)
         if (createError) {
-          setError('Failed to create certificate')
+          setError(`Failed to create certificate: ${createError.message || JSON.stringify(createError)}`)
           console.error(createError)
         } else {
           setShowForm(false)
@@ -103,7 +103,7 @@ function Certificates() {
         }
       }
     } catch (err) {
-      setError('An unexpected error occurred')
+      setError(`An unexpected error occurred: ${err.message || JSON.stringify(err)}`)
       console.error(err)
     } finally {
       setFormLoading(false)
@@ -227,7 +227,7 @@ function Certificates() {
             <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
               <div className={`rounded-3xl border p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto ${isDarkMode ? 'bg-[#08080f] border-white/10' : 'bg-white border-slate-200'
                 }`}>
-                <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center justify-between mb-4">
                   <h2 className={`text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'
                     }`}>
                     {editingCertificate ? 'Edit Certificate' : 'Create New Certificate'}
@@ -240,6 +240,16 @@ function Certificates() {
                     <X className="w-5 h-5" />
                   </button>
                 </div>
+                
+                {error && (
+                  <div className={`mb-6 p-4 rounded-xl border ${isDarkMode
+                      ? 'bg-red-500/20 border-red-500/50 text-red-200'
+                      : 'bg-red-50 border-red-200 text-red-700'
+                    }`}>
+                    {error}
+                  </div>
+                )}
+
                 <CertificateForm
                   certificate={editingCertificate}
                   onSave={handleSave}

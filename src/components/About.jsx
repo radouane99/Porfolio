@@ -373,7 +373,9 @@ const WorkHistory = () => {
             </div>
 
             <div className="space-y-8">
-              {education.map((edu, index) => (
+              {education.map((edu, index) => {
+                const institutionLogo = getCompanyLogo(edu.institution);
+                return (
                 <Card
                   key={`${edu.degree}-${edu.institution}`}
                   className={`card-hover reveal ${isDarkMode ? 'bg-white/4 border-white/8 card-hover-dark text-white' : 'bg-white border-violet-100 card-hover-light text-gray-900'}`}
@@ -381,9 +383,16 @@ const WorkHistory = () => {
                 >
                   <div className={`p-6 border-b ${isDarkMode ? 'border-white/8' : 'border-violet-100'}`}>
                     <div className="flex items-start justify-between mb-3">
-                      <div>
-                        <h3 className={`text-xl font-bold mb-1 font-head ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{edu.degree}</h3>
-                        <p className={`text-base font-semibold mb-2 ${isDarkMode ? 'text-violet-400' : 'text-violet-600'}`}>{edu.institution}</p>
+                      <div className="flex items-start gap-4">
+                        <div className="flex-shrink-0">
+                          {institutionLogo && (
+                            <img src={institutionLogo} alt={`${normalizeCompany(edu.institution)} logo`} className="w-12 h-12 rounded" />
+                          )}
+                        </div>
+                        <div>
+                          <h3 className={`text-xl font-bold mb-1 font-head ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{edu.degree}</h3>
+                          <p className={`text-base font-semibold mb-2 ${isDarkMode ? 'text-violet-400' : 'text-violet-600'}`}>{edu.institution}</p>
+                        </div>
                       </div>
                       <span className={`px-3 py-1 text-xs font-semibold rounded-full border ${
                         edu.status === 'In Progress'
@@ -432,7 +441,8 @@ const WorkHistory = () => {
                     </div>
                   </div>
                 </Card>
-              ))}
+              );
+              })}
             </div>
           </div>
 
