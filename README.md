@@ -61,14 +61,15 @@ A modern, full-featured portfolio website built with React and Vite, showcasing 
 - **ESLint** - Code linting
 - **TypeScript Types** - Type definitions for React
 
-## 📸 Images & Assets
-<img width="1895" height="855" alt="Screenshot 2025-11-29 101213" src="https://github.com/user-attachments/assets/faeb8ce6-b695-4d79-81d3-e23aeb5dac09" />
-<img width="1879" height="834" alt="Screenshot 2025-11-29 101520" src="https://github.com/user-attachments/assets/a463264c-d0a6-4a7a-ae5c-cdf9e0dcc996" />
-<img width="1894" height="868" alt="Screenshot 2025-11-29 101307" src="https://github.com/user-attachments/assets/6ecbe5e3-3f39-4487-b156-d3278b355d75" />
-<img width="1890" height="868" alt="Screenshot 2025-11-29 101333" src="https://github.com/user-attachments/assets/589ff3a7-fc44-4968-8d26-98c2fb4c380f" />
-<img width="1879" height="862" alt="Screenshot 2025-11-29 101356" src="https://github.com/user-attachments/assets/aadf6c8a-b9a3-4f94-a78b-f5b49c6b4f40" />
-<img width="1073" height="513" alt="Screenshot 2025-11-29 200540" src="https://github.com/user-attachments/assets/f2f1847f-5de0-4875-a7d6-c81b9ce33027" />
+## 📸 Screen Tests (Cyber-Elegant Redesign)
 
+### Desktop View
+![Desktop View - Portfolio](./screenshots/desktop-portfolio.png)
+![Desktop View - Portfolio](./screenshots/desktop-dashboard.png)
+![Desktop View - Admin Dashboard](./screenshots/desktop-admin.png)
+
+
+> **Note**: Screenshot image files are located in the `screenshots/` directory of this repository.
 
 
 ### Technology Icons
